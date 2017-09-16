@@ -5,7 +5,8 @@ import { StructureListComponent } from './structure-list/structure-list.componen
 
 const routes: Routes = [
   { path: '', redirectTo: '/structure', pathMatch: 'full' },
-  { path: 'structure',  component: StructureListComponent }
+  { path: 'structure',  component: StructureListComponent },
+  { path: 'structure/:itemId',  component: StructureListComponent },
 ];
 
 @NgModule({
