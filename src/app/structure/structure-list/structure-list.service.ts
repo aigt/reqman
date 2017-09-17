@@ -8,14 +8,15 @@ export class StructureListService {
   // временный контейнер дэйты, пока нет бэкенда
   items: StructureListItem[] = [
     new StructureListItem(0, 'root', [1, 4]),
-    new StructureListItem(1, 'construction1', [2, 3]),
-    new StructureListItem(2, 'construction12', []),
-    new StructureListItem(3, 'construction13', []),
-    new StructureListItem(4, 'construction4', [5, 6, 7]),
-    new StructureListItem(5, 'construction45', []),
-    new StructureListItem(6, 'construction46', []),
-    new StructureListItem(7, 'construction47', [])
+    new StructureListItem(1, 'Робот', [2, 3]),
+    new StructureListItem(2, 'Втулка', []),
+    new StructureListItem(3, 'Рука', []),
+    new StructureListItem(4, 'Голова', [5, 6, 7]),
+    new StructureListItem(5, 'Сенсор', []),
+    new StructureListItem(6, 'Динамик', []),
+    new StructureListItem(7, 'Кожух', [])
   ];
+
 
   /**
    * Возвращает список дочерних элементов для элемента

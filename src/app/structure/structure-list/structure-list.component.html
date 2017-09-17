@@ -1,14 +1,7 @@
 <div class="col-xs-4">
-  <h4>
-    Список структурных элемнетов
-  </h4>
-
-  <ul>
-    <li 
-      *ngFor="let item of items" 
-      [routerLink]="['/structure', item.id]"
-    >
-      {{ item.name }}
+  <ul class="list-group">
+    <li  class="list-group-item" *ngFor="let item of items">
+      <a [routerLink]="['/structure', item.id]">{{item.name}}</a>
     </li>
   </ul>
 </div>
