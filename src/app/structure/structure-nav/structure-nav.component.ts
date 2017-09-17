@@ -1,22 +1,22 @@
-import { Component, OnInit, Output, OnDestroy } from '@angular/core';
-import { StructureListService } from './structure-list.service';
-import { StructureListItem } from './structure-list-item';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StructureEntityService } from '../structure-entity/structure-entity.service';
+import { StructureListItem } from '../structure-list/structure-list-item';
 
 @Component({
-  selector: 'app-structure-list',
-  templateUrl: './structure-list.component.html',
-  styleUrls: ['./structure-list.component.css']
+  selector: 'app-structure-nav',
+  templateUrl: './structure-nav.component.html',
+  styleUrls: ['./structure-nav.component.css']
 })
-export class StructureListComponent implements OnInit, OnDestroy {
+export class StructureNavComponent implements OnInit, OnDestroy {
 
   // подписка на события роутера
   private routeSub: any;
 
-  items: StructureListItem[];
+  parentItemNames: StructureListItem[] = [];
 
   constructor(
-    private structureListService: StructureListService,
+    private structureEntityService: StructureEntityService,
     private route: ActivatedRoute
   ) { }
 
@@ -27,10 +27,10 @@ export class StructureListComponent implements OnInit, OnDestroy {
       // который по умолчанию = 0
       if (isNaN(itemId) || !isFinite(itemId)) itemId = 0;
 
-      this.items = this.structureListService.childrenFor(itemId);
+      this.parentItemNames = this.structureEntityService.parentPathsStackForId(itemId, true);
     });
   }
-
+  
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }

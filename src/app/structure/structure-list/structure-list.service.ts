@@ -36,4 +36,12 @@ export class StructureListService {
 
   }
 
+  getItemForId(id: number): StructureListItem {
+
+    return this.items.find(
+      (item: StructureListItem) => item.id === id
+    );
+    
+  }
+
 }
