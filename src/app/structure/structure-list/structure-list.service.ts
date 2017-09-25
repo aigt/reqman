@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+
 import { StructureListItem } from './structure-list-item';
 
 
@@ -17,6 +18,10 @@ export class StructureListService {
     new StructureListItem(7, 'Кожух', [])
   ];
 
+  addedItem: EventEmitter<StructureListItem> = new EventEmitter();
+  onShowAddItemWindow: EventEmitter<any> = new EventEmitter();
+
+  constructor(  ) { }
 
   /**
    * Возвращает список дочерних элементов для элемента
@@ -42,6 +47,18 @@ export class StructureListService {
     return this.items.find(
       (item: StructureListItem) => item.id === id
     );
+    
+  }
+
+  addItem(item: StructureListItem) {
+    let newItem: StructureListItem = new StructureListItem(
+      this.items.length, item.name, item.childrenIds.slice()
+    );
+    this.items.push(newItem);
+    this.addedItem.emit(newItem);
+  }
+
+  showAddItemWindow() {
     
   }
 

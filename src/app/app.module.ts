@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -10,6 +11,9 @@ import { StructureComponent } from './structure/structure.component';
 import { StructureNavComponent } from './structure/structure-nav/structure-nav.component';
 import { StructureEntityService } from './structure/structure-entity/structure-entity.service';
 import { StructureListService } from './structure/structure-list/structure-list.service';
+import { AddItemModalComponent } from './structure/structure-list/add-item-modal/add-item-modal.component';
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,16 +21,21 @@ import { StructureListService } from './structure/structure-list/structure-list.
     StructureListComponent,
     StructureEntityComponent,
     StructureComponent,
-    StructureNavComponent
+    StructureNavComponent,
+    AddItemModalComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    ModalModule.forRoot(),
+    BootstrapModalModule,
+    FormsModule 
   ],
   providers: [
     StructureEntityService,
     StructureListService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddItemModalComponent]
 })
 export class AppModule { }
