@@ -29,7 +29,7 @@ export class StructureListService {
    * @param itemId id для поиска дочерних элементов
    */
   childrenFor(itemId: number): StructureListItem[] {
-
+    
     // получаем список id дочерних элементов
     let childrenIds: number[] = this.items.find(
       (item: StructureListItem) => { return item.id === itemId; }
@@ -50,16 +50,26 @@ export class StructureListService {
     
   }
 
-  addItem(item: StructureListItem) {
+  /**
+   * Добавляет элемент в список
+   * @param item элемент для добавления, id будет автоматически заменён
+   * @param parentId Id родительского элемента
+   */
+  addItem(item: StructureListItem, parentId: number) {
+
     let newItem: StructureListItem = new StructureListItem(
       this.items.length, item.name, item.childrenIds.slice()
     );
-    this.items.push(newItem);
-    this.addedItem.emit(newItem);
-  }
 
-  showAddItemWindow() {
-    
+    // добавляем элемент в список
+    this.items.push(newItem);
+
+    // регестрируем элемент в родительском элементе
+    this.getItemForId(parentId).childrenIds.push(newItem.id);
+
+    // уведомление об изменениях
+    this.addedItem.emit(newItem);
+
   }
 
 }

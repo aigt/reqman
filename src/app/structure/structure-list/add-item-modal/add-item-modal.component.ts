@@ -7,8 +7,8 @@ import {
 } from 'angular2-modal';
 
 import { AddItemModelContext } from './add-item-modal-context';
-import { StructureListService } from '../structure-list.service';
-import { StructureListItem } from '../structure-list-item';
+import { StructureEntityService } from '../../structure-entity/structure-entity.service';
+import { StructureEntity } from '../../structure-entity/structure-entity';
 
 @Component({
   selector: 'app-add-item-modal',
@@ -23,7 +23,7 @@ export class AddItemModalComponent implements CloseGuard, ModalComponent<AddItem
 
     constructor(
       public dialog: DialogRef<AddItemModelContext>,
-      private structureListService: StructureListService
+      private structureEntityService: StructureEntityService
     ) {
       this.context = dialog.context;
       dialog.setCloseGuard(this);
@@ -39,7 +39,10 @@ export class AddItemModalComponent implements CloseGuard, ModalComponent<AddItem
     }
 
     onSubmit() {
-      this.structureListService.addItem(new StructureListItem(0, this.name, []));
+      this.structureEntityService.addEntity(
+        new StructureEntity(0, this.name, this.description,[0]), 
+        this.context.parentId
+      );
       this.dialog.close();
     }
     

@@ -32,6 +32,12 @@ export class StructureEntityService {
       );
     }
 
+    /**
+     * Возвращает стэк с элементами, которые находятся до данного элемента выше
+     * в иерахии структур
+     * @param id Id сущности
+     * @param excludeRoot нужно ли исключить корневой элемент из результата
+     */
     parentPathsStackForId(id: number, excludeRoot: boolean): StructureListItem[] {
 
       // находим нужную сущность по id
@@ -53,5 +59,19 @@ export class StructureEntityService {
         (id: number) => this.structureListService.getItemForId(id)
       );
       
+    }
+
+    addEntity(entity: StructureEntity, parentId: number) {
+      // добавляяем сущность в список
+      let newEntity: StructureEntity = entity.getCopy();
+      newEntity.id = this.items.length;
+      newEntity.structurePathIds = [...(this.entityById(parentId).structurePathIds), parentId];
+      this.items.push(newEntity);
+
+      // регестрируем с сервисе списка структуры
+      this.structureListService.addItem(
+        new StructureListItem(0, newEntity.name, []),
+        parentId
+      );
     }
 }

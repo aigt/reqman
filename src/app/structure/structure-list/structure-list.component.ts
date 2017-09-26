@@ -21,6 +21,7 @@ export class StructureListComponent implements OnInit, OnDestroy {
   private addedItemSub: any;
   
   items: StructureListItem[];
+  itemId: number;
 
   constructor(
     private modal: Modal,
@@ -30,12 +31,12 @@ export class StructureListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
-      let itemId: number = +params['itemId'];
+      this.itemId = +params['itemId'];
       // Если itemId не был задан, принимаем его за id корневого элемента,
       // который по умолчанию = 0
-      if (isNaN(itemId) || !isFinite(itemId)) itemId = 0;
+      if (isNaN(this.itemId) || !isFinite(this.itemId)) this.itemId = 0;
 
-      this.items = this.structureListService.childrenFor(itemId);
+      this.items = this.structureListService.childrenFor(this.itemId);
     });
 
     this.addedItemSub = this.structureListService.addedItem.subscribe(item => {
@@ -49,7 +50,7 @@ export class StructureListComponent implements OnInit, OnDestroy {
   }
 
   addStructureClicked() {
-    this.modal.open(AddItemModalComponent,  overlayConfigFactory({ num1: 2, num2: 3 }, BSModalContext));
+    this.modal.open(AddItemModalComponent,  overlayConfigFactory({ parentId: this.itemId }, BSModalContext));
   }
 
   onAddItem() {
