@@ -6,7 +6,7 @@ import { StructureListService } from "../structure-list/structure-list.service";
 @Injectable()
 export class StructureEntityService {
 
-    // временный контейнер дэйты, пока нет бэкенда
+    /** временный контейнер дэйты, пока нет бэкенда */ 
     items: StructureEntity[] = [
       new StructureEntity(0, 'root', 'Корневой элемент', []),
       new StructureEntity(1, 'Робот', 'Глобальная конструкция', [0]),

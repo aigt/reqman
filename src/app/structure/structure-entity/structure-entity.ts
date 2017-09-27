@@ -1,6 +1,19 @@
 import { StructureListItem } from "../structure-list/structure-list-item";
+import { TechnicalRequirement } from "./technical-requirement";
+import { DesignRequirement } from "./design-requirement";
 
 export class StructureEntity {
+
+  technicalRequirements: TechnicalRequirement[] = [
+    new TechnicalRequirement('тр1','условие1','обоснование1'),
+    new TechnicalRequirement('тр2','условие2','обоснование2'),
+    new TechnicalRequirement('тр3','условие3','обоснование3')
+  ];
+  designRequirements: DesignRequirement[] = [
+    new TechnicalRequirement('тр1','условие1','обоснование1'),
+    new TechnicalRequirement('тр2','условие2','обоснование2'),
+    new TechnicalRequirement('тр3','условие3','обоснование3')
+  ];
 
   /**
    * Конструктор
