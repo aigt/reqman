@@ -40,7 +40,7 @@ export class AddItemModalComponent implements CloseGuard, ModalComponent<AddItem
 
     onSubmit() {
       this.structureEntityService.addEntity(
-        new StructureEntity(0, this.name, this.description,[0]), 
+        new StructureEntity(0, this.name, this.description, [0], this.structureEntityService), 
         this.context.parentId
       );
       this.dialog.close();

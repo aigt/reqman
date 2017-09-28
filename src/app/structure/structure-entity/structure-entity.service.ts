@@ -8,14 +8,14 @@ export class StructureEntityService {
 
     /** временный контейнер дэйты, пока нет бэкенда */ 
     items: StructureEntity[] = [
-      new StructureEntity(0, 'root', 'Корневой элемент', []),
-      new StructureEntity(1, 'Робот', 'Глобальная конструкция', [0]),
-      new StructureEntity(2, 'Втулка', 'Втулка с резьбой эмалерованная', [0, 1]),
-      new StructureEntity(3, 'Рука', 'Для манипуляций', [0, 1]),
-      new StructureEntity(4, 'Голова', 'Модуль для робота', [0]),
-      new StructureEntity(5, 'Сенсор', 'Служит "глазами"', [0, 4]),
-      new StructureEntity(6, 'Динамик', 'Через него говорит', [0, 4]),
-      new StructureEntity(7, 'Кожух', 'Для защиты', [0, 4])
+      new StructureEntity(0, 'root', 'Корневой элемент', [], this),
+      new StructureEntity(1, 'Робот', 'Глобальная конструкция', [0], this),
+      new StructureEntity(2, 'Втулка', 'Втулка с резьбой эмалерованная', [0, 1], this),
+      new StructureEntity(3, 'Рука', 'Для манипуляций', [0, 1], this),
+      new StructureEntity(4, 'Голова', 'Модуль для робота', [0], this),
+      new StructureEntity(5, 'Сенсор', 'Служит "глазами"', [0, 4], this),
+      new StructureEntity(6, 'Динамик', 'Через него говорит', [0, 4], this),
+      new StructureEntity(7, 'Кожух', 'Для защиты', [0, 4], this)
     ];
 
     constructor(

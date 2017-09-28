@@ -1,6 +1,8 @@
 import { StructureListItem } from "../structure-list/structure-list-item";
 import { TechnicalRequirement } from "./technical-requirement";
 import { DesignRequirement } from "./design-requirement";
+import { Injectable } from "@angular/core";
+import { StructureEntityService } from "./structure-entity.service";
 
 export class StructureEntity {
 
@@ -27,19 +29,31 @@ export class StructureEntity {
     public id: number,
     public name: string,
     public description: string,
-    public structurePathIds: number[]
+    public structurePathIds: number[],
+    private structureEntityService: StructureEntityService
   ) {}
 
   /**
    * Возвращает копию данной сущности
    */
-  getCopy() {
+  getCopy(): StructureEntity {
     return new StructureEntity(
       this.id,
       this.name,
       this.description,
-      this.structurePathIds.slice()
+      this.structurePathIds.slice(),
+      this.structureEntityService
     )
+  }
+
+  getParentTechnicalRequirements(): TechnicalRequirement[] {
+    let parentTechnicalRequirements: TechnicalRequirement[] =[];
+    this.structurePathIds.forEach(id => {
+      if(id === this.id) return;
+      let parentEntity: StructureEntity = this.structureEntityService.entityById(id);
+      parentTechnicalRequirements.push(...parentEntity.technicalRequirements);
+    });
+    return parentTechnicalRequirements;
   }
 
 }
