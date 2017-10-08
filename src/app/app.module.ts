@@ -14,6 +14,8 @@ import { StructureListService } from './structure/structure-list/structure-list.
 import { AddItemModalComponent } from './structure/structure-list/add-item-modal/add-item-modal.component';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { ChecklistComponent } from './checklist/checklist.component';
+import { EditItemModalComponent } from './structure/structure-list/edit-item-modal/edit-item-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     StructureEntityComponent,
     StructureComponent,
     StructureNavComponent,
-    AddItemModalComponent
+    AddItemModalComponent,
+    ChecklistComponent,
+    EditItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,9 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     StructureListService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddItemModalComponent]
+  entryComponents: [
+    AddItemModalComponent,
+    EditItemModalComponent
+  ]
 })
 export class AppModule { }

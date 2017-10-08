@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Добавить элемент структуры</h1>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="structureName">Имя</label>
+        <input type="text" class="form-control" id="structureName" placeholder="Имя" [(ngModel)]="entity.name">
+      </div>
+      <div class="form-group">
+        <label for="structureDescription">Описание</label>
+        <input type="text" class="form-control" id="structureDescription" placeholder="Описание" [(ngModel)]="entity.description">
+      </div>
+      <div class="col-xs-12">
+        <div class="text-right">
+          <button type="button" class="btn btn-default" (click)="onCancel()">Отмена</button>
+          <button type="submit" class="btn btn-default" (click)="onSubmit()">Сохранить изменения</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+&nbsp;

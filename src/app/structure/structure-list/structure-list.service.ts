@@ -19,7 +19,7 @@ export class StructureListService {
   ];
 
   addedItem: EventEmitter<StructureListItem> = new EventEmitter();
-  onShowAddItemWindow: EventEmitter<any> = new EventEmitter();
+  updatedItem: EventEmitter<StructureListItem> = new EventEmitter();
 
   constructor(  ) { }
 
@@ -70,6 +70,19 @@ export class StructureListService {
     // уведомление об изменениях
     this.addedItem.emit(newItem);
 
+  }
+
+  updateItem(item: StructureListItem) {
+    let index = this.items.findIndex(i => i.id === item.id);
+    if (index > -1) {
+      this.items[index] = item;
+
+      // уведомление об изменениях
+      this.updatedItem.emit(item);
+    }
+    else {
+      throw new Error(`Элемента с индексом ${index} не существует`);
+    }
   }
 
 }
