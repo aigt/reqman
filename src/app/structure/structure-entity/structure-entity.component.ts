@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { StructureListItem } from '../structure-list/structure-list-item';
 import { StructureEntityService } from './structure-entity.service';
@@ -8,6 +8,7 @@ import { EditItemModalComponent } from '../structure-list/edit-item-modal/edit-i
 
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { RemoveItemModalComponent } from '../structure-list/remove-item-modal/remove-item-modal.component';
 
 @Component({
   selector: 'app-structure-entity',
@@ -20,10 +21,13 @@ export class StructureEntityComponent implements OnInit, OnDestroy {
   private routeSub: any;
   // подписка на событие изменения сущности
   private changedEntitySub: any;
+  // подписка на событие удаления сущности
+  private removedEntitySub: any;
   
   entity: StructureEntity;
 
   constructor(
+    private router: Router,
     private modal: Modal,
     private structureEntityService: StructureEntityService,
     private route: ActivatedRoute
@@ -44,16 +48,26 @@ export class StructureEntityComponent implements OnInit, OnDestroy {
         this.entity = entity.getCopy();
       }
     });
+
+    this.removedEntitySub = this.structureEntityService.removedEntity.subscribe(entity => {
+      if(entity.id === this.entity.id) {
+        this.router.navigate(['structure']);
+      }
+    });
   }
   
   ngOnDestroy() {
     this.routeSub.unsubscribe();
     this.changedEntitySub.unsubscribe();
+    this.removedEntitySub.unsubscribe();
   }
 
   editStructureClicked(id) {
     this.modal.open(EditItemModalComponent,  overlayConfigFactory({ id: id }, BSModalContext));    
   }
 
+  removeStructureClicked(id) {
+    this.modal.open(RemoveItemModalComponent,  overlayConfigFactory({ id: id }, BSModalContext));    
+  }
   
 }

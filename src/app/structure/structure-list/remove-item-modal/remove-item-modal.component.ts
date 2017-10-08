@@ -8,20 +8,21 @@ import {
 
 import { StructureEntityService } from '../../structure-entity/structure-entity.service';
 import { StructureEntity } from '../../structure-entity/structure-entity';
-import { EditItemModelContext } from './edit-item-modal-context';
+import { RemoveItemModelContext } from './remove-item-modal-context';
 
 @Component({
-  selector: 'app-edit-item-modal',
-  templateUrl: './edit-item-modal.component.html',
-  styleUrls: ['./edit-item-modal.component.css']
+  selector: 'app-remove-item-modal',
+  templateUrl: './remove-item-modal.component.html',
+  styleUrls: ['./remove-item-modal.component.css']
 })
-export class EditItemModalComponent implements CloseGuard, ModalComponent<EditItemModelContext> {
-  context: EditItemModelContext;
+export class RemoveItemModalComponent implements CloseGuard, ModalComponent<RemoveItemModelContext> {
+
+  context: RemoveItemModelContext;
   
   public entity: StructureEntity;
 
   constructor(
-    public dialog: DialogRef<EditItemModelContext>,
+    public dialog: DialogRef<RemoveItemModelContext>,
     private structureEntityService: StructureEntityService
   ) {
     this.context = dialog.context;
@@ -39,11 +40,12 @@ export class EditItemModalComponent implements CloseGuard, ModalComponent<EditIt
   }
 
   onSubmit() {
-    this.structureEntityService.updateEntity(this.entity);
+    this.structureEntityService.removeEntity(this.entity);
     this.dialog.close();
   }
   
   onCancel() {
     this.dialog.close();
   }
+
 }

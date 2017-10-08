@@ -13,7 +13,7 @@
         </button>
         <ul class="dropdown-menu">
           <li><a (click)="editStructureClicked(entity.id)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Редактировать</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить</a></li>
+          <li><a (click)="removeStructureClicked(entity.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить</a></li>
         </ul>
       </div>
       <div class="alert ">{{entity.description}}</div>

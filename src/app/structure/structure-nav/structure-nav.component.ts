@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StructureEntityService } from '../structure-entity/structure-entity.service';
 import { StructureListItem } from '../structure-list/structure-list-item';
+import { StructureEntity } from '../structure-entity/structure-entity';
 
 @Component({
   selector: 'app-structure-nav',
@@ -14,6 +15,7 @@ export class StructureNavComponent implements OnInit, OnDestroy {
   private routeSub: any;
 
   parentItemNames: StructureListItem[] = [];
+  currentEntity: StructureEntity;
 
   constructor(
     private structureEntityService: StructureEntityService,
@@ -28,6 +30,7 @@ export class StructureNavComponent implements OnInit, OnDestroy {
       if (isNaN(itemId) || !isFinite(itemId)) itemId = 0;
 
       this.parentItemNames = this.structureEntityService.parentPathsStackForId(itemId, true);
+      this.currentEntity = this.structureEntityService.entityById(itemId);
     });
   }
   

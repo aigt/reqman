@@ -16,6 +16,7 @@ import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { EditItemModalComponent } from './structure/structure-list/edit-item-modal/edit-item-modal.component';
+import { RemoveItemModalComponent } from './structure/structure-list/remove-item-modal/remove-item-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditItemModalComponent } from './structure/structure-list/edit-item-mod
     StructureNavComponent,
     AddItemModalComponent,
     ChecklistComponent,
-    EditItemModalComponent
+    EditItemModalComponent,
+    RemoveItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { EditItemModalComponent } from './structure/structure-list/edit-item-mod
   bootstrap: [AppComponent],
   entryComponents: [
     AddItemModalComponent,
-    EditItemModalComponent
+    EditItemModalComponent,
+    RemoveItemModalComponent
   ]
 })
 export class AppModule { }

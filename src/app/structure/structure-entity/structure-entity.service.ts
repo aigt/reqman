@@ -19,6 +19,7 @@ export class StructureEntityService {
   ];
 
   changedEntity: EventEmitter<StructureEntity> = new EventEmitter();
+  removedEntity: EventEmitter<StructureEntity> = new EventEmitter();
 
   constructor(
     private structureListService: StructureListService
@@ -28,7 +29,7 @@ export class StructureEntityService {
    * Находит нужную сущность по id
    * @param id id для поиска
    */
-  entityById(id: number) {
+  entityById(id: number): StructureEntity {
     return this.items.find(
       (item: StructureEntity) => item.id === id
     );
@@ -92,7 +93,31 @@ export class StructureEntityService {
       this.changedEntity.emit(protoEntity);
     }
     else {
-      throw new Error(`Сущности с индексом ${index} не существует`);
+      throw new Error(`Сущности с id: ${protoEntity.id} не существует`);
     }
   }
+
+  removeEntity(entity: StructureEntity) {
+
+    let index = this.items.findIndex(e => e.id === entity.id);
+    if (index > -1) {
+      this.items.splice(index, 1);
+      // удалить дочерние
+      let slItem: StructureListItem = this.structureListService.getItemForId(entity.id);
+      slItem.childrenIds.forEach(childId => {
+        let entityToDelete = this.entityById(childId);
+        this.removeEntity(entityToDelete);
+      });
+
+      // регестрируем с сервисе списка структуры
+      slItem.name = entity.name;
+      this.structureListService.removeItem(slItem, false);
+
+      this.removedEntity.emit(entity);
+    }
+    else {
+      throw new Error(`Сущности с id: ${entity.id} не существует`);
+    }
+  }
+
 }

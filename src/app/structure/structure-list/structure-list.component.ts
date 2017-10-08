@@ -7,6 +7,7 @@ import { StructureListService } from './structure-list.service';
 import { StructureListItem } from './structure-list-item';
 import { AddItemModalComponent } from './add-item-modal/add-item-modal.component';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
+import { RemoveItemModalComponent } from './remove-item-modal/remove-item-modal.component';
 
 @Component({
   selector: 'app-structure-list',
@@ -22,6 +23,8 @@ export class StructureListComponent implements OnInit, OnDestroy {
   private addedItemSub: any;
   // подписка на события изменения элемента
   private updatedItemSub: any;
+  // подписка на события удаления элемента
+  private removedItemSub: any;
   
   items: StructureListItem[];
   itemId: number;
@@ -48,7 +51,16 @@ export class StructureListComponent implements OnInit, OnDestroy {
 
     this.updatedItemSub = this.structureListService.updatedItem.subscribe(uItem => {
       let index = this.items.findIndex(item => item.id === uItem.id);
-      this.items[index] = uItem;
+      if(index > -1) {
+        this.items[index] = uItem;
+      }
+    });
+    
+    this.removedItemSub = this.structureListService.removedItem.subscribe(uItem => {
+      let index = this.items.findIndex(item => item.id === uItem.id);
+      if(index > -1) {        
+        this.items.splice(index, 1);
+      }
     });
   }
 
@@ -56,6 +68,7 @@ export class StructureListComponent implements OnInit, OnDestroy {
     this.routeSub.unsubscribe();
     this.addedItemSub.unsubscribe();
     this.updatedItemSub.unsubscribe();
+    this.removedItemSub.unsubscribe();
   }
 
   addStructureClicked() {
@@ -64,6 +77,10 @@ export class StructureListComponent implements OnInit, OnDestroy {
 
   editStructureClicked(id) {
     this.modal.open(EditItemModalComponent,  overlayConfigFactory({ id: id }, BSModalContext));    
+  }
+
+  removeStructureClicked(id) {
+    this.modal.open(RemoveItemModalComponent,  overlayConfigFactory({ id: id }, BSModalContext));    
   }
 
   onAddItem() {

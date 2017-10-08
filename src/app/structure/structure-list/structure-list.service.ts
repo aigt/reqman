@@ -20,6 +20,7 @@ export class StructureListService {
 
   addedItem: EventEmitter<StructureListItem> = new EventEmitter();
   updatedItem: EventEmitter<StructureListItem> = new EventEmitter();
+  removedItem: EventEmitter<StructureListItem> = new EventEmitter();
 
   constructor(  ) { }
 
@@ -79,6 +80,25 @@ export class StructureListService {
 
       // уведомление об изменениях
       this.updatedItem.emit(item);
+    }
+    else {
+      throw new Error(`Элемента с индексом ${index} не существует`);
+    }
+  }
+
+  removeItem(item: StructureListItem, removeCildren: boolean) {
+    let index = this.items.findIndex(i => i.id === item.id);
+    if (index > -1) {
+      if (removeCildren) {
+        this.items[index].childrenIds.forEach(childId => {
+          let itemToDelete = this.getItemForId(childId);
+          this.removeItem(itemToDelete, true);
+        });
+      }
+      this.items.splice(index, 1);
+
+      // уведомление об изменениях
+      this.removedItem.emit(item);
     }
     else {
       throw new Error(`Элемента с индексом ${index} не существует`);
