@@ -17,6 +17,9 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { EditItemModalComponent } from './structure/structure-list/edit-item-modal/edit-item-modal.component';
 import { RemoveItemModalComponent } from './structure/structure-list/remove-item-modal/remove-item-modal.component';
+import { AddTechRequirementModalComponent } from './structure/structure-entity/add-tech-requirement-modal/add-tech-requirement-modal.component';
+import { EditTechRequirementModalComponent } from './structure/structure-entity/edit-tech-requirement-modal/edit-tech-requirement-modal.component';
+import { RemoveTechRequirementModalComponent } from './structure/structure-entity/remove-tech-requirement-modal/remove-tech-requirement-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { RemoveItemModalComponent } from './structure/structure-list/remove-item
     AddItemModalComponent,
     ChecklistComponent,
     EditItemModalComponent,
-    RemoveItemModalComponent
+    RemoveItemModalComponent,
+    AddTechRequirementModalComponent,
+    EditTechRequirementModalComponent,
+    RemoveTechRequirementModalComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,10 @@ import { RemoveItemModalComponent } from './structure/structure-list/remove-item
   entryComponents: [
     AddItemModalComponent,
     EditItemModalComponent,
-    RemoveItemModalComponent
+    RemoveItemModalComponent,
+    AddTechRequirementModalComponent,
+    EditTechRequirementModalComponent,
+    RemoveTechRequirementModalComponent
   ]
 })
 export class AppModule { }

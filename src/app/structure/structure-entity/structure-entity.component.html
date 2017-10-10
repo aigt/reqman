@@ -17,17 +17,23 @@
         </ul>
       </div>
       <div class="alert ">{{entity.description}}</div>
+    </div>
 
-
-
+    <div class="panel-body" *ngIf="entity.id !== 0">
       <h4>Тех. требования:</h4>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped" *ngIf="entity.id !== 0">
       <thead>  
         <tr>
           <th>№</th>
           <th>Тех. требование</th>
-          <th> </th>
+          <th>
+            <div class="btn-group btn-group-xs pull-right">
+              <button type="button" class="btn btn-default" (click)="addTechRequirementClicked()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -35,9 +41,10 @@
         <tr *ngFor="let techReq of entity.technicalRequirements; let i = index">
           <td>{{i + 1}}</td>
           <td>
-            <p><i>Требование предъявляется, если</i> {{techReq.condition}}</p>
-            <p><i>Требование:</i> {{techReq.text}}</p>
-            <p><i>Требование на основании:</i> {{techReq.reason}}</p>
+            <p *ngIf="techReq.condition"><i class="requirement-notation">Требование предъявляется, если:</i><br/> {{techReq.condition}}</p>
+            <p *ngIf="!techReq.condition"><i class="requirement-notation">Требование предъявляется:</i><br/> всегда</p>
+            <p><i class="requirement-notation">Требование:</i><br/> {{techReq.text}}</p>
+            <p *ngIf="techReq.reason"><i class="requirement-notation">Требование на основании:</i><br/> {{techReq.reason}}</p>
           </td>
           <td>
             <div class="btn-group btn-group-xs pull-right">
@@ -45,8 +52,8 @@
                 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Редактировать</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить</a></li>
+                <li><a (click)="editTechRequirementClicked(techReq)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Редактировать</a></li>
+                <li><a (click)="removeTechRequirementClicked(techReq.key)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить</a></li>
               </ul>
             </div>
           </td>
@@ -55,9 +62,10 @@
         <tr *ngFor="let techReq of entity.getParentTechnicalRequirements(); let i = index">
           <td><span class="label label-default">{{i + 1 + entity.technicalRequirements.length}}</span></td>
           <td>
-            <p><i>Требование предъявляется, если</i> {{techReq.condition}}</p>
-            <p><i>Требование:</i> {{techReq.text}}</p>
-            <p><i>Требование на основании:</i> {{techReq.reason}}</p>
+            <p *ngIf="techReq.condition"><i class="requirement-notation">Требование предъявляется, если:</i><br/> {{techReq.condition}}</p>
+            <p *ngIf="!techReq.condition"><i class="requirement-notation">Требование предъявляется:</i><br/> всегда</p>
+            <p><i class="requirement-notation">Требование:</i><br/> {{techReq.text}}</p>
+            <p *ngIf="techReq.reason"><i class="requirement-notation">Требование на основании:</i><br/> {{techReq.reason}}</p>
           </td>
           <td>
             <div class="btn-group btn-group-xs pull-right">
@@ -65,8 +73,7 @@
                 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Редактировать</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить</a></li>
+                <li><a [routerLink]="['/structure', techReq.key.entityId]"><span class="glyphicon glyphicon-level-up" aria-hidden="true"></span> Перейти в элемент где находится тех. требование</a></li>
               </ul>
             </div>
           </td>
@@ -74,5 +81,21 @@
 
       </tbody>
     </table>
+
+    <div class="panel-body" *ngIf="entity.id !== 0">
+      <h4>Требования к конструкции:</h4>
+      <p>to do</p>
+    </div>
+
+    <div class="panel-body" *ngIf="entity.id !== 0">
+      <h4>Требования к оформлению:</h4>
+      <p>to do</p>  
+    </div>
+
+    <div class="panel-body" *ngIf="entity.id !== 0">
+      <h4>Требования к модели:</h4>
+      <p>to do</p>
+    </div>
+
   </div>
 </div>

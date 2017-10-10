@@ -8,14 +8,7 @@ export class StructureListService {
 
   // временный контейнер дэйты, пока нет бэкенда
   items: StructureListItem[] = [
-    new StructureListItem(0, 'root', [1, 4]),
-    new StructureListItem(1, 'Робот', [2, 3]),
-    new StructureListItem(2, 'Втулка', []),
-    new StructureListItem(3, 'Рука', []),
-    new StructureListItem(4, 'Голова', [5, 6, 7]),
-    new StructureListItem(5, 'Сенсор', []),
-    new StructureListItem(6, 'Динамик', []),
-    new StructureListItem(7, 'Кожух', [])
+    new StructureListItem(0, 'root', []),
   ];
 
   addedItem: EventEmitter<StructureListItem> = new EventEmitter();
@@ -67,7 +60,7 @@ export class StructureListService {
 
     // регестрируем элемент в родительском элементе
     this.getItemForId(parentId).childrenIds.push(newItem.id);
-
+    
     // уведомление об изменениях
     this.addedItem.emit(newItem);
 

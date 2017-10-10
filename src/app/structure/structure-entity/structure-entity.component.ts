@@ -9,6 +9,11 @@ import { EditItemModalComponent } from '../structure-list/edit-item-modal/edit-i
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { RemoveItemModalComponent } from '../structure-list/remove-item-modal/remove-item-modal.component';
+import { AddTechRequirementModalComponent } from './add-tech-requirement-modal/add-tech-requirement-modal.component';
+import { EditTechRequirementModalComponent } from './edit-tech-requirement-modal/edit-tech-requirement-modal.component';
+import { TechnicalRequirement } from './technical-requirement';
+import { TechnicalRequirementKey } from './technical-requirement-key';
+import { RemoveTechRequirementModalComponent } from './remove-tech-requirement-modal/remove-tech-requirement-modal.component';
 
 @Component({
   selector: 'app-structure-entity',
@@ -68,6 +73,18 @@ export class StructureEntityComponent implements OnInit, OnDestroy {
 
   removeStructureClicked(id) {
     this.modal.open(RemoveItemModalComponent,  overlayConfigFactory({ id: id }, BSModalContext));    
+  }
+
+  addTechRequirementClicked() {
+    this.modal.open(AddTechRequirementModalComponent,  overlayConfigFactory({ toEntity: this.entity }, BSModalContext));
+  }
+
+  editTechRequirementClicked(req: TechnicalRequirement) {
+    this.modal.open(EditTechRequirementModalComponent,  overlayConfigFactory({ requirement: req }, BSModalContext));
+  }
+
+  removeTechRequirementClicked(key: TechnicalRequirementKey) {
+    this.modal.open(RemoveTechRequirementModalComponent,  overlayConfigFactory({ key: key }, BSModalContext));
   }
   
 }

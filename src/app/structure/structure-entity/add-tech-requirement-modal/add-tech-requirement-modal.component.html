@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Добавить техническое требование</h1>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="conditionArea">Условие</label>
+        <textarea class="form-control" id="conditionArea" placeholder="Условие" ref-textarea [(ngModel)]="condition" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="textArea">Текст требования</label>
+        <textarea class="form-control" id="textArea" placeholder="Условие" ref-textarea [(ngModel)]="text" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="textArea">Обоснование</label>
+        <textarea class="form-control" id="textArea" placeholder="Обоснование" ref-textarea [(ngModel)]="reason" rows="4"></textarea>
+      </div>
+      <div class="col-xs-12">
+        <div class="text-right">
+          <button type="button" class="btn btn-default" (click)="onCancel()">Отмена</button>
+          <button type="submit" class="btn btn-default" (click)="onSubmit()">Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+&nbsp;
